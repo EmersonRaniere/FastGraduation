@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>FastGraduation</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport"
+		content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<meta name="description" content="Projeto PWebII ...." />
+
+	<link rel="author" href="Emerson Raniere e Jonathas Arts" />
+
+	<link rel="StyleSheet" type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/assets/css/bootstrap.css" />
+	<link rel="StyleSheet" type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/assets/fonts/font-awesome.min.css" />
+	<link rel="StyleSheet" type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/assets/css/plugins/dataTables/dataTables.bootstrap.css" />
+	<link rel="StyleSheet" type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/assets/css/mint-admin.css" />
+
+</h:head>
+<h:body>
+	<div id="wrapper">
+		<!-- não encontrei um equivalente para a tag nav em jsf -->
+		<nav class="navbar navbar-default navbar-static-top" role="navigation">
+		<div class="navbar-header">
+			<h:form>
+				<!-- Link deve ir para a página principal -->
+				<h:commandLink styleClass="navbar-brand" actionListener="index.xhtml">FastGraduation</h:commandLink>
+			</h:form>
+		</div>
+		</nav>
+
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header">Área para adicionar menus</h3>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">Alunos Concluintes</div>
+						
+						<div class="panel-body">
+							<div class="table-responsive">
+								<!-- Inserir o data table aqui com os alunos cadastrados -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+</h:body>
+</html>
