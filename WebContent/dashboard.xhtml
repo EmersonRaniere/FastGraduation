@@ -29,14 +29,46 @@
 		<!-- não encontrei um equivalente para a tag nav em jsf -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation">
 		<div class="navbar-header">
-			<h:form>
+			<h:form id="link_init">
 				<!-- Link deve ir para a página principal -->
-				<h:commandLink styleClass="navbar-brand" actionListener="index.xhtml">FastGraduation</h:commandLink>
+				<h:commandLink styleClass="navbar-brand"
+					actionListener="dashboard.xhtml">FastGraduation</h:commandLink>
 			</h:form>
 		</div>
 		</nav>
 
+
+		<nav class="navbar-default navbar-static-side" role="navigation">
+		<div class="sidebar-collapse">
+			<ul class="nav" id="side-menu">
+				<li>
+					<div class="user-info-wrapper">
+						<div class="user-info-profile-image">
+							<!-- Imagem -->
+						</div>
+						<div class="user-info">
+							<div class="user-welcome">Bem vindo</div>
+							<div class="username">
+								<!-- usuariobean.nome -->
+								Valéria <strong>Cavalcanti</strong>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li><!-- add id para ação do botão -->
+				<h:form id="bt_">
+					<h:commandLink action="dashboard.xhtml">
+						<i class="fa fa-dashboard fa-fw fa-3x"></i>
+					</h:commandLink>
+				</h:form>
+				</li>
+			</ul>
+		</div>
+		</nav>
+
+
 		<div id="page-wrapper">
+
 			<div class="row">
 				<div class="col-lg-12">
 					<h3 class="page-header">Área para adicionar menus</h3>
@@ -47,7 +79,7 @@
 				<div class="col-lg-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">Alunos Concluintes</div>
-						
+
 						<div class="panel-body">
 							<div class="table-responsive">
 								<!-- Inserir o data table aqui com os alunos cadastrados -->
@@ -56,10 +88,33 @@
 					</div>
 				</div>
 			</div>
+
 		</div>
 
 	</div>
 
+	<!-- Core Scripts - Include with every page -->
+	<script
+		src="${facesContext.externalContext.requestContextPath}/assets/js/jquery-1.10.2.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/assets/js/bootstrap.min.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
+	<!-- Page-Level Plugin Scripts - Tables -->
+	<script
+		src="${facesContext.externalContext.requestContextPath}/assets/js/plugins/dataTables/jquery.dataTables.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/assets/js/mint-admin.js"></script>
+
+	<!-- Verificar esre script -->
+	<script>
+		$(document).ready(function() {
+			$('#dataTables-example').dataTable();
+		});
+	</script>
+	
 </h:body>
 </html>
