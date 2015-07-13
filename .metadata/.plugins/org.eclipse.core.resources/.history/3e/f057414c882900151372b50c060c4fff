@@ -1,0 +1,5 @@
+package br.edu.ifpb.pweb.tsi.dao;
+
+public class DAOInterface {
+
+}
