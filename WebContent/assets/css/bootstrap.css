@@ -4121,7 +4121,8 @@ a.list-group-item {
   .panel-default > .panel-heading {
     color: #333333;
     background-color: whitesmoke;
-    border-color: #dfe2e4; }
+    border-color: #dfe2e4; 
+    text-align:center;}
     .panel-default > .panel-heading + .panel-collapse .panel-body {
       border-top-color: #bdc3c7; }
     .panel-default > .panel-heading > .dropdown .caret {

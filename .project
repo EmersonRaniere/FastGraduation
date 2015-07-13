@@ -33,4 +33,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>WebContent/assets/img/logo_tsi.png</name>
+			<type>1</type>
+			<location>D:/workspace/FastGraduation/WebContent/assets/img/logo_tsi.png</location>
+		</link>
+	</linkedResources>
 </projectDescription>
