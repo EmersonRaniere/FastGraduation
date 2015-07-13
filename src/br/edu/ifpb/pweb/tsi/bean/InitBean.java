@@ -14,16 +14,16 @@ public class InitBean {
 	
 	@PostConstruct
 	public void init(){
-		AlunoDAO test = new AlunoDAO();
-		
-		Aluno a1 = new Aluno("20102370111", "Emerson Raniere");
-		test.begin();
-		test.create(a1);
-		
-		test.commit();
-		
-		
-		System.out.println(((Aluno)test.read(a1.getMatricula())).getNomeAluno());
+//		AlunoDAO test = new AlunoDAO();
+//		
+//		Aluno a1 = new Aluno("20102370111", "Emerson Raniere");
+//		test.begin();
+//		test.create(a1);
+//		
+//		test.commit();
+//		
+//		
+//		System.out.println(((Aluno)test.read(a1.getMatricula())).getNomeAluno());
 		
 	}
 }
