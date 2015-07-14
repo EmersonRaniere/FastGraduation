@@ -6,6 +6,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	
+<f:metadata>
+	<f:event type="preRenderView" listener="#{alunoBean.MostrarTodos}"/></f:metadata>
 <h:head>
 	<title>FastGraduation</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -32,40 +35,39 @@
 			<div class="navbar-header">
 				<!-- Link deve ir para a página principal -->
 				<h:commandLink styleClass="navbar-brand"
-					actionListener="dashboard.xhtml">FastGraduation</h:commandLink>
+					action="dashboard.xhtml">FastGraduation</h:commandLink>
 			</div>
 		</h:form> </nav>
-
 
 		<nav class="navbar-default navbar-static-side" role="navigation">
-		<h:form id="bt_">
-			<div class="sidebar-collapse">
-				<ul class="nav" id="side-menu">
-					<li>
-						<div class="user-info-wrapper">
-							<div class="user-info-profile-image">
-								<!-- Imagem -->
-							</div>
-							<div class="user-info">
-								<div class="user-welcome">Bem vindo</div>
-								<div class="username">
-									<!-- usuariobean.nome -->
-									Valéria <strong>Cavalcanti</strong>
+			<h:form id="bt_">
+				<div class="sidebar-collapse">
+					<ul class="nav" id="side-menu">
+						<li>
+							<div class="user-info-wrapper">
+								<div class="user-info-profile-image">
+									<!-- Imagem -->
+								</div>
+								<div class="user-info">
+									<div class="user-welcome">Bem vindo</div>
+									<div class="username">
+										<!-- usuariobean.nome -->
+										Valéria <strong>Cavalcanti</strong>
+									</div>
 								</div>
 							</div>
-						</div>
-					</li>
-					<li>
-						<!-- add id para ação do botão --> <h:commandLink
-							action="dashboard.xhtml">
-							<i class="fa fa-dashboard fa-fw fa-3x"></i>
-						</h:commandLink>
-
-					</li>
-				</ul>
-			</div>
-		</h:form> </nav>
-
+						</li>
+						<li>
+							<!-- add id para ação do botão --> <h:commandLink
+								action="dashboard.xhtml">
+								<i class="fa fa-dashboard fa-fw fa-3x"></i>
+							</h:commandLink>
+	
+						</li>
+					</ul>
+				</div>
+			</h:form>
+		</nav>
 
 		<div id="page-wrapper">
 			<h:messages errorStyle="color:red" layout="table" globalOnly="true" showDetails="true"/>
@@ -88,14 +90,60 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading"><h3>Alunos Concluintes</h3></div>
-
+						<div class="panel-heading">
+							<h3>Alunos Concluintes</h3>
+						</div>
 						<div class="panel-body">
 							<div class="table-responsive">
-								<!-- Inserir o data table aqui com os alunos cadastrados -->
-								<h:form>
-								<h:commandButton actionListener="#{alunoBean.Exibir()" value="mostrar"/>
-								</h:form>
+								<div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="dataTables_length" id="dataTables-example_length">
+												<label>
+													<select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm">
+														<option value="10">10</option>
+														<option value="25">25</option>
+														<option value="50">50</option>
+														<option value="100">100</option>
+													</select>Quantidade por página
+												</label>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div id="dataTables-example_filter" class="dataTables_filter">
+												<label>Buscar:<input type="search" class="form-control input-sm" aria-controls="dataTables-example"/></label>
+											</div>
+										</div>
+									</div>
+									<h:dataTable var="ab" value="#{alunoBean.alunos}" 
+									styleClass="table table-striped table-bordered table-hover dataTable no-footer">
+										<h:column >
+											<f:facet name="header">Matricula</f:facet>
+											 <h:outputText value="#{ab.matricula}"/> 
+										</h:column>
+										<h:column>	
+											<f:facet name="header">Nome</f:facet> 
+											<h:outputText value="#{ab.nomeAluno}"/> 
+										</h:column>
+										<h:column>	
+											<f:facet name="header">Nota</f:facet> 
+											<h:outputText value="#{ab.notaAluno}"/>
+										</h:column>
+										<h:column>	
+											<f:facet name="header">Titulo do Projeto</f:facet> 
+											<h:outputText value="#{ab.tituloProjeto}"/> 
+										</h:column>
+										<h:column>	
+											<f:facet name="header">Data de Apresentação</f:facet> 
+											<h:outputText value="#{ab.dataApresentacao}">
+								    			<f:convertDateTime pattern="dd/MM/yyyy"/>
+								    		</h:outputText>
+										</h:column>
+									</h:dataTable>
+								</div>
+													<!-- Inserir o data table aqui com os alunos cadastrados -->
+													<h:form>
+													</h:form>
 							</div>
 						</div>
 					</div>

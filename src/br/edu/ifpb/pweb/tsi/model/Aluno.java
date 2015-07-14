@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Aluno {
@@ -28,6 +30,8 @@ public class Aluno {
 	@OneToOne
 	private Professor orientador;
 	private Double notaAluno;
+	
+	@Temporal(TemporalType.DATE)
 	private Date dataApresentacao;
 	
 	@OneToMany
