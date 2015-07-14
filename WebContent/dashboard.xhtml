@@ -68,6 +68,7 @@
 
 
 		<div id="page-wrapper">
+			<h:messages errorStyle="color:red" layout="table" globalOnly="true" showDetails="true"/>
 			<br/>
 			<div class="row">
 				<h:form>
@@ -92,6 +93,9 @@
 						<div class="panel-body">
 							<div class="table-responsive">
 								<!-- Inserir o data table aqui com os alunos cadastrados -->
+								<h:form>
+								<h:commandButton actionListener="#{alunoBean.Exibir()" value="mostrar"/>
+								</h:form>
 							</div>
 						</div>
 					</div>

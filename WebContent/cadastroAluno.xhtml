@@ -42,7 +42,7 @@
 
 
 		<div id="page-wrapper">
-
+			<h:messages errorStyle="color:red" layout="table" globalOnly="true" showDetails="true"/>
 			<div class="row">
 				<div class="col-lg-12">
 					<h3 class="page-header">Área para adicionar menus</h3>
@@ -64,7 +64,7 @@
 										<div class="col-md-12">
 											<div class="form-group">
 												<label>Nome Concluinte</label>
-												<h:inputText id="nomeAluno" styleClass="form-control"
+												<h:inputText id="nomeAluno" value="#{alunoBean.nomeAluno}" tyleClass="form-control"
 													name="username">
 													<!-- validação -->
 												</h:inputText>
@@ -72,14 +72,14 @@
 											<div class="form-group">
 												<label>Matricula</label>
 
-												<h:inputText id="matricula" styleClass="form-control"
+												<h:inputText id="matricula" value="#{alunoBean.matricula}" styleClass="form-control"
 													name="matricula">
 													<!-- validação -->
 												</h:inputText>
 											</div>
 											<div class="form-group">
 												<label>Nota</label>
-												<h:inputText id="nota" styleClass="form-control" name="nota">
+												<h:inputText id="nota" value="#{alunoBean.notaAluno}" styleClass="form-control" name="nota">
 													<f:validateDoubleRange minimum="0" maximum="100"></f:validateDoubleRange>
 												</h:inputText>
 											</div>
@@ -91,7 +91,7 @@
 											</div>
 											<div class="form-group">
 												<label>Título do Trabalho</label>
-												<h:inputText id="titulo" styleClass="form-control"
+												<h:inputText id="titulo" value="#{alunoBean.tituloProjeto}" styleClass="form-control"
 													name="titulo">
 													<!-- validação -->
 												</h:inputText>
@@ -147,7 +147,7 @@
 								</fieldset>
 
 								<div class="form-actions">
-									<h:commandButton value="Salvar"	styleClass="btn btn-lg btn-outline btn-primary" />
+									<h:commandButton action="#{alunoBean.Salvar()}" value="Salvar"	styleClass="btn btn-lg btn-outline btn-primary" />
 									<h:commandButton value="Cancelar" styleClass="btn btn-lg btn-outline btn-danger" />
 								</div>
 							</h:form>
