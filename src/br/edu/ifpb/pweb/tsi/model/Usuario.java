@@ -13,13 +13,15 @@ public class Usuario {
 	private int id;
 	private String login;
 	private String senha;
+	private int role;
 	
 	public Usuario(){};
 	
-	public Usuario(String login, String senha) {
+	public Usuario(String login, String senha, int role) {
 		super();
 		this.login = login;
 		this.senha = senha;
+		this.role = role;
 	}
 
 	public String getLogin() {
@@ -44,6 +46,14 @@ public class Usuario {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
 	}
 	
 	
