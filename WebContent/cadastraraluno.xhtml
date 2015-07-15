@@ -57,7 +57,7 @@
 						</li>
 						<li>
 							<!-- add id para ação do botão --> 
-							<h:commandLink value="Novo Concluinte" action="cadastraraluno.jsf?faces-redirect=true">
+							<h:commandLink value="Novo Concluinte" action="cadastraraluno.jsf">
 								<i class="fa fa-plus fa-fw fa-3x"></i>
 							</h:commandLink>
 	
@@ -186,7 +186,7 @@
 
 								<div class="form-actions">
 									<h:commandButton action="#{alunoBean.SalvarAluno()}" value="Salvar"	styleClass="btn btn-lg btn-outline btn-primary" />
-									<h:commandButton value="#{alunoBean.limparCampos()}" type="reset" styleClass="btn btn-lg btn-outline btn-danger" />
+									<h:commandButton value="Limpar" type="reset" styleClass="btn btn-lg btn-outline btn-danger" />
 								</div>
 							</h:form>
 						</div>
