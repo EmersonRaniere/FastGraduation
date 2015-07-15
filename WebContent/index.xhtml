@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:ph="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 
@@ -25,11 +25,11 @@
 
 </h:head>
 <h:body>
+	<!-- #{testaBean.init()} -->
 	<div class="container">
 
 		<!-- Adicionar Modal para mensagens de erro -->
-		<h:messages>
-		</h:messages>
+		
 
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
@@ -38,25 +38,23 @@
 						<img src="${facesContext.externalContext.requestContextPath}/assets/img/logo_tsi.png" alt="TSIIFPB" width="200"/>
 					</div>
 					<div class="panel-body">
+						<h:messages layout="list" globalOnly="true" showDetails="true" errorStyle="red"/>
 						<h:form role="form">
 							<fieldset>
 								<div class="form-group">
-									<h:inputText id="login" styleClass="form-control" p:placeholder="Login">
+									<h:inputText id="login" value="#{loginBean.login}" styleClass="form-control" ph:placeholder="Login">
 										<!-- validação -->
 									</h:inputText>
 									<!-- <h:outputText rendered="usuario.login" value="Insira um login"/> -->
 								</div>
 								<div class="form-group">
-									<h:inputSecret id="senha" styleClass="form-control" p:placeholder="Senha">
+									<h:inputSecret id="senha" value="#{loginBean.senha}" styleClass="form-control" ph:placeholder="Senha">
 										<!-- Validação Senha -->
 									</h:inputSecret>
 									<!-- <h:outputText rendered="usuario.senha" value="Insira a senha"/> -->
 								</div>
-								<div class="checkbox">
-									<!-- <label> <input name="remember" type="checkbox"
-										value="Remember Me">Remember Me </label> styleClass="btn btn-lg btn-primary btn-block" -->
-								</div>
-								<h:commandButton styleClass="btn btn-lg btn-primary btn-block" value="Entrar" action="dashboard.jsf"/>
+				
+								<h:commandButton styleClass="btn btn-lg btn-primary btn-block" value="Entrar" action="#{loginBean.fazerLogin}"/>
 								
 							</fieldset>
 						</h:form>

@@ -7,5 +7,4 @@ public class EventoDAO extends DAO<Evento>{
 	public EventoDAO() {
 		super();
 	}
-
 }

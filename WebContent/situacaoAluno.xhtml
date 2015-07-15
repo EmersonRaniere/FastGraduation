@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+
+	<title>FastGraduation</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport"
+		content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<meta name="description" content="Projeto PWebII ...." />
+	<meta name="author" content="Emerson Raniere e Jonathas Arts" />
+
+	<link rel="StyleSheet" type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/assets/css/bootstrap.css" />
+	<link rel="StyleSheet" type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/assets/fonts/font-awesome.min.css" />
+	<link rel="StyleSheet" type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/assets/css/mint-admin.css" />
+
+</h:head>
+<h:body>
+	<div id="wrapper">
+		<!-- não encontrei um equivalente para a tag nav em jsf -->
+		<nav class="navbar navbar-default navbar-static-top" role="navigation">
+		<h:form id="link_init">
+			<div class="navbar-header">
+				<!-- Link deve ir para a página principal -->
+				<h:commandLink styleClass="navbar-brand" action="dashboard.xhtml">FastGraduation</h:commandLink>
+			</div>
+		</h:form> </nav>
+
+		<nav class="navbar-default navbar-static-side" role="navigation">
+		<h:form id="bt_">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="side-menu">
+					<li>
+						<div class="user-info-wrapper">
+							<div class="user-info-profile-image">
+								<!-- Imagem -->
+							</div>
+							<div class="user-info">
+								<div class="user-welcome">Bem vindo</div>
+								<div class="username">
+									<!-- usuariobean.nome -->
+									Valéria <strong>Cavalcanti</strong>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<!-- add id para ação do botão --> <h:commandLink
+							value="Novo Concluinte" action="cadastroAluno.jsf">
+							<i class="fa fa-plus fa-fw fa-3x"></i>
+						</h:commandLink>
+
+					</li>
+				</ul>
+			</div>
+		</h:form> </nav>
+
+
+		<div id="page-wrapper">
+			<h:messages errorStyle="color:red" layout="table" globalOnly="true"
+				showDetails="true" />
+
+			<div class="row">
+				<div class="col-lg-12">
+					<!-- Default wizard -->
+					<div class="panel panel-default">
+						<!-- Dados Concluinte Escolhido -->
+						<div class="panel-heading">
+							<h3>
+								<div class="col-md-8">Nome do Aluno</div>
+								<div class="col-md-4">Matricula</div>
+							</h3>
+							
+							<br /> <br /> <!-- Ajustar br no css -->
+							
+							<blockquote>
+								<div class="col-md-2">
+									<small>Data Apresentação</small>00/00/2015
+								</div>
+								<div class="col-md-6">
+									<small>Título do Trabalho</small>Trabalho muito bom
+								</div>
+								<div class="col-md-4">
+									<small>Tipo/Natureza</small>Extensão
+								</div>
+							</blockquote>
+						</div>
+						<!-- /Dados Concluinte Escolhido -->
+						<h:form>
+						<div class="panel-body">
+							<div class="panel-group" id="accordion">
+								
+								<!-- Evento -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<h:outputLink value="#collapseOne">
+												Evento 1
+                                            	<f:passThroughAttribute name="data-toggle" value="collapse" />
+												<f:passThroughAttribute name="data-parent" value="#accordion" />
+											</h:outputLink>
+										</h4>
+									</div>
+									<div id="collapseOne" class="panel-collapse collapse"
+										style="height: auto;">
+										<div class="panel-body">
+											<div class="col-xs-6 col-md-4">
+												<small>Data Evento</small>
+												<p>00/00/0000</p>
+											</div>
+											<div class="col-xs-12 col-md-8">
+												<small>Data Anotação</small>
+												<p>texto anotação...</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /Evento -->
+								
+								<!-- Evento -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<h:outputLink value="#collapseTwo">
+                                            	Evento 2
+                                            	<f:passThroughAttribute name="data-toggle" value="collapse" />
+												<f:passThroughAttribute name="data-parent" value="#accordion" />
+											</h:outputLink>
+										</h4>
+									</div>
+									<div id="collapseTwo" class="panel-collapse in"
+										style="height: auto;">
+										<div class="panel-body">
+											<div class="col-xs-6 col-md-4">
+												<small>Data Evento</small>
+												<p>00/00/0000</p>
+											</div>
+											<div class="col-xs-12 col-md-8">
+												<small>Data Anotação</small>
+												<p>texto anotação...</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /Evento -->
+								
+								<br/>
+								<h:commandButton value="Novo Evento"  styleClass="btn btn-lg btn-outline bnt-block btn-default"/>
+
+							</div>
+						</div>
+						</h:form>
+						<!-- /default wizard -->
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+		<!-- Core Scripts - Include with every page -->
+		<script
+			src="${facesContext.externalContext.requestContextPath}/assets/js/jquery-1.10.2.js"></script>
+		<script
+			src="${facesContext.externalContext.requestContextPath}/assets/js/bootstrap.min.js"></script>
+		<script
+			src="${facesContext.externalContext.requestContextPath}/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+		<script
+			src="${facesContext.externalContext.requestContextPath}/assets/js/mint-admin.js"></script>
+	</div>
+</h:body>
+</html>

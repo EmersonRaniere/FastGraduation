@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:ph="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 
@@ -37,7 +37,33 @@
 		</h:form> </nav>
 		
 		<nav class="navbar-default navbar-static-side" role="navigation">
-			<!-- Menu Heremita ou valéria de acordo com o login -->
+			<h:form id="bt_">
+				<div class="sidebar-collapse">
+					<ul class="nav" id="side-menu">
+						<li>
+							<div class="user-info-wrapper">
+								<div class="user-info-profile-image">
+									<!-- Imagem -->
+								</div>
+								<div class="user-info">
+									<div class="user-welcome">Bem vindo</div>
+									<div class="username">
+										<!-- usuariobean.nome -->
+										Valéria <strong>Cavalcanti</strong>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<!-- add id para ação do botão --> 
+							<h:commandLink value="Novo Concluinte" action="cadastroAluno.jsf">
+								<i class="fa fa-plus fa-fw fa-3x"></i>
+							</h:commandLink>
+	
+						</li>
+					</ul>
+				</div>
+			</h:form>
 		</nav>
 
 

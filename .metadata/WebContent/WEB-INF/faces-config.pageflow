@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14368294312140" configfile="/FastGraduation/WebContent/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14368294312140" configfile="/FastGraduation/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" id="pf14369341793443" referenceLink="//@navigationRule.0/@fromViewId|" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="dashboard.xhtml" id="pf14369341793455" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" path="/dashboard.xhtml"/>
+</pageflow:Pageflow>
