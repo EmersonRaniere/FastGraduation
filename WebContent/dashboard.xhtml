@@ -7,12 +7,13 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ph="http://xmlns.jcp.org/jsf/passthrough">
+<f:metadata>
+	<f:event type="preRenderView" listener="#{alunoBean.MostrarTodos}" />
+	<f:viewParam name="matricula" value="#{alunoBean.matricula}"></f:viewParam>
+</f:metadata>
 
 #{sessionBean.check()}
 
-<f:metadata>
-	<f:event type="preRenderView" listener="#{alunoBean.MostrarTodos}" />
-</f:metadata>
 
 <h:head>
 	<title>FastGraduation</title>
@@ -35,25 +36,26 @@
 <h:body>
 	<div id="wrapper">
 		<nav class="navbar navbar-default navbar-static-top" role="navigation">
-			<h:form id="link_init">
-				<div class="navbar-header">
-					<!-- Link deve ir para a página principal -->
-					<h:commandLink styleClass="navbar-brand" action="dashboard.xhtml">FastGraduation</h:commandLink>
-				</div>
-				<ul class="nav navbar-top-links navbar-right">
-					<li class="dropdown">
-						<h:outputLink value="#" styleClass="dropdown-toggle">
-							<i class="fa fa-user  fa-2x fa-fw"></i>
-                            <f:passThroughAttribute name="data-toggle" value="dropdown" />
-						</h:outputLink>
-						<ul class="dropdown-menu dropdown-user">
-							<li class="divider"></li>
-							<li><h:commandLink value="Logout" action="#{sessionBean.logout()}"><i class="fa fa-sign-out fa-fw"></i></h:commandLink></li>
-						</ul>
-					</li>
-				</ul>
-			</h:form>
-		</nav>
+		<h:form id="link_init">
+			<div class="navbar-header">
+				<!-- Link deve ir para a página principal -->
+				<h:commandLink styleClass="navbar-brand" action="dashboard.xhtml">FastGraduation</h:commandLink>
+			</div>
+			<ul class="nav navbar-top-links navbar-right">
+				<li class="dropdown"><h:outputLink value="#"
+						styleClass="dropdown-toggle">
+						<i class="fa fa-user  fa-2x fa-fw"></i>
+						<f:passThroughAttribute name="data-toggle" value="dropdown" />
+					</h:outputLink>
+					<ul class="dropdown-menu dropdown-user">
+						<li class="divider"></li>
+						<li><h:commandLink value="Logout"
+								action="#{sessionBean.logout()}">
+								<i class="fa fa-sign-out fa-fw"></i>
+							</h:commandLink></li>
+					</ul></li>
+			</ul>
+		</h:form> </nav>
 
 		<nav class="navbar-default navbar-static-side" role="navigation">
 		<h:form id="bt_">
@@ -73,11 +75,18 @@
 							</div>
 						</div>
 					</li>
-					<li>
-						<h:commandLink value="Novo Concluinte" action="cadastroAluno.jsf" rendered="#{sessionBean.role == 1}">
+					<li><h:commandLink value="Novo Concluinte"
+							action="cadastroAluno.jsf">
 							<i class="fa fa-plus fa-fw fa-3x"></i>
-						</h:commandLink>
-					</li>
+						</h:commandLink></li>
+					<li><h:commandLink value="Novo Professor">
+							<!-- Add link para cadastro professor.jsf -->
+							<i class="fa fa-plus fa-fw fa-3x"></i>
+						</h:commandLink></li>
+					<li rendered="#{sessionBean.role == 1}"><h:commandLink
+							value="Botão exclusivo teste" action="cadastroAluno.jsf">
+							<i class="fa fa-plus fa-fw fa-3x"></i>
+						</h:commandLink></li>
 				</ul>
 			</div>
 		</h:form> </nav>
@@ -111,33 +120,53 @@
 								<div id="dataTables-example_wrapper"
 									class="dataTables_wrapper form-inline" role="grid">
 									<!-- Row filtro e pesquisar removidas -->
+									<h:form id="formExcluir">
 									<h:dataTable var="ab" value="#{alunoBean.alunos}"
-										styleClass="table table-striped table-bordered table-hover dataTable no-footer">
+										rendered="#{not empty alunoBean.alunos}"
+										styleClass="table table-striped table-bordered table-hover dataTable no-footer"
+										columnClasses="col-md-2,col-md-4,col-md-4,col-md-1,col-md-1">
 										<h:column>
-											<h:outputLink id="irIndividual" value="#{alunoBean.pegarAlunoIndividual()}">
-								            	<f:param name="matricula" value="#{ab.matricula}" />#{ab.matricula}
+											<f:facet name="header">Matricula</f:facet>
+											<h:outputLink id="irIndividual"
+												value="#{alunoBean.pegarAlunoIndividual()}">
+												<f:param name="matricula" value="#{ab.matricula}" />#{ab.matricula}
 								            </h:outputLink>
-								            <!-- AQUI ACIMA -->
 										</h:column>
+
 										<h:column>
 											<f:facet name="header">Nome</f:facet>
 											<h:outputText value="#{ab.nomeAluno}" />
 										</h:column>
-										<h:column>
-											<f:facet name="header">Nota</f:facet>
-											<h:outputText value="#{ab.notaAluno}" />
-										</h:column>
-										<h:column>
-											<f:facet name="header">Titulo do Projeto</f:facet>
-											<h:outputText value="#{ab.tituloProjeto}" />
-										</h:column>
+
 										<h:column>
 											<f:facet name="header">Data de Apresentação</f:facet>
 											<h:outputText value="#{ab.dataApresentacao}">
 												<f:convertDateTime pattern="dd/MM/yyyy" />
 											</h:outputText>
 										</h:column>
-									</h:dataTable>
+
+										<h:column>
+											<f:facet name="header">Editar</f:facet>
+											<div class="col-xs-6">
+												<h:outputLink id="editarIndividual"	value="#{alunoBean.editarAlunoIndividual()}">
+													<f:param name="matricula" value="#{ab.matricula}">
+														<i class="fa fa-list"></i>
+													</f:param>
+												</h:outputLink>
+											</div>
+										</h:column>
+
+										<h:column>
+											<h:form id="deletarUsuario">
+												<f:facet name="header">Excluir</f:facet>
+													<div class="col-xs-6">
+														<!-- CRIAR DELETAR ! -->
+													</div>
+											</h:form>
+										</h:column>
+										
+
+									</h:dataTable></h:form>
 								</div>
 							</div>
 						</div>

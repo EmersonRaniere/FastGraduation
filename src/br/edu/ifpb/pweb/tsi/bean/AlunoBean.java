@@ -6,13 +6,15 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import br.edu.ifpb.pweb.tsi.dao.AlunoDAO;
 import br.edu.ifpb.pweb.tsi.model.Aluno;
 import br.edu.ifpb.pweb.tsi.model.TipoDefesa;
+
+import com.sun.javafx.collections.MappingChange.Map;
 
 @ManagedBean(name = "alunoBean")
 @RequestScoped
@@ -30,31 +32,38 @@ public class AlunoBean {
 	private List<Aluno> alunos;
 
 //	@ManagedProperty(value="#{param.selecionado}")
-	private Aluno alunoSelecionado;
+	public Aluno alunoSelecionado;
 	
 	
 	public void mostrarIndividual(){
 		AlunoDAO dao = new AlunoDAO();
 		alunoSelecionado = dao.read(this.matricula);
 	}
+	public void editarMostrarIndividual(){
+		AlunoDAO dao = new AlunoDAO();
+		alunoSelecionado = dao.read(this.matricula);
+		this.nomeAluno = alunoSelecionado.getNomeAluno();
+		this.tituloProjeto = alunoSelecionado.getTituloProjeto();
+		this.notaAluno = alunoSelecionado.getNotaAluno();
+		this.tipo = alunoSelecionado.getTipo();
+		this.dataApresentacao = alunoSelecionado.getDataApresentacao();
+//		this.orientador = alunoSelecionado.get();
+//		this.nomeAluno = alunoSelecionado.getNomeAluno();
+//		this.nomeAluno = alunoSelecionado.getNomeAluno();
+	}
 	
 	public String pegarAlunoIndividual(){
-		System.out.println("entrou");
-		
-		return "situacaoAluno.jsf";
+		return "situacaoaluno.jsf";
+	}
+	
+	public String editarAlunoIndividual(){
+		return "editaraluno.jsf";
 	}
 
 	public void MostrarTodos(){
 		alunos = new ArrayList<Aluno>();
 		AlunoDAO dao = new AlunoDAO();
 		alunos = dao.readAll();
-		System.out.println(alunos.toString());
-		if(alunos.isEmpty()){
-			System.out.println("vazio");
-		}else{
-			System.out.println(alunos.get(0).getDataApresentacao());
-		}
-		
 	}
 	
 	public Boolean verificarExistencia(Aluno alu){
@@ -82,6 +91,13 @@ public class AlunoBean {
 		dao.commit();
 	}
 	
+	public void atualizarNoBanco(Aluno alu){
+		AlunoDAO dao = new AlunoDAO();
+		dao.begin();
+		dao.update(alu);
+		dao.commit();
+	}
+	
 	public String SalvarAluno(){
 		Aluno alu = new Aluno();
 		alu.setDataApresentacao(this.dataApresentacao);
@@ -101,6 +117,36 @@ public class AlunoBean {
 		}
 	}
 	
+	public String excluirAluno(Aluno alu){
+		
+		AlunoDAO dao = new AlunoDAO();
+		dao.begin();	
+		alu = dao.read(this.getMatricula());
+		
+		dao.delete(alu);
+		dao.commit();
+		return null;
+		
+	}
+	public String updateAluno(){
+		Aluno alu = new Aluno();
+		alu.setDataApresentacao(this.getDataApresentacao());
+		alu.setMatricula(this.getMatricula());
+		alu.setNotaAluno(this.getNotaAluno());
+		alu.setNomeAluno(this.getNomeAluno());
+		alu.setTituloProjeto(this.getTituloProjeto());
+		
+
+		Boolean ok = verificarExistencia(alu);
+		if (!ok){
+			atualizarNoBanco(alu);
+			return "dashboard?faces-redirect=true";
+		}else {
+//			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "A matricula já existe!", null);
+//			FacesContext.getCurrentInstance().addMessage("editarformulario:matricula", msg);
+			return null;
+		}
+	}
 	
 	public String getMatricula() {
 		return matricula;

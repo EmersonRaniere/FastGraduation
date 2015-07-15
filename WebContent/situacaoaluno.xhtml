@@ -5,11 +5,14 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:ph="http://xmlns.jcp.org/jsf/passthrough">
 <f:metadata>
 	<f:viewParam name="matricula" value="#{alunoBean.matricula}"></f:viewParam>
 	<f:event type="preRenderView" listener="#{alunoBean.mostrarIndividual}"/>
 </f:metadata>
+
+#{sessionBean.check()}
+
 <h:head>
 
 	<title>FastGraduation</title>
@@ -34,7 +37,7 @@
 		<h:form id="link_init">
 			<div class="navbar-header">
 				<!-- Link deve ir para a página principal -->
-				<h:commandLink styleClass="navbar-brand" action="dashboard.xhtml">FastGraduation</h:commandLink>
+				<h:commandLink styleClass="navbar-brand" action="dashboard.jsf?faces-redirect=true">FastGraduation</h:commandLink>
 			</div>
 		</h:form> </nav>
 

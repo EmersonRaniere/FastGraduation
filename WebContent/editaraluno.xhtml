@@ -7,8 +7,13 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ph="http://xmlns.jcp.org/jsf/passthrough">
 
+<f:metadata>
+	<f:viewParam name="matricula" value="#{alunoBean.matricula}"></f:viewParam>
+	<f:event type="preRenderView" listener="#{alunoBean.editarMostrarIndividual}"/>
+</f:metadata>
 
 #{sessionBean.check()}
+
 <h:head>
 
 	<title>FastGraduation</title>
@@ -34,7 +39,7 @@
 			<div class="navbar-header">
 				<!-- Link deve ir para a página principal -->
 				<h:commandLink styleClass="navbar-brand"
-					action="dashboard.xhtml">FastGraduation</h:commandLink>
+					action="dashboard.jsf?faces-redirect=true">FastGraduation</h:commandLink>
 			</div>
 		</h:form> </nav>
 		
@@ -85,7 +90,7 @@
 							<h3>Adicionar Concluinte</h3>
 						</div>
 						<div class="panel-body">
-							<h:form id="formulario"  class="form-horizontal">
+							<h:form id="editarformulario"  class="form-horizontal">
 								<fieldset class="step" id="step1">
 									<div></div>
 									<div class="margin-top">
@@ -95,14 +100,14 @@
 												
 												<h:inputText required="true" id="nomeAluno" value="#{alunoBean.nomeAluno}" styleClass="form-control" name="username"
 												requiredMessage="Digite o nome do aluno.">
-													<!-- validação -->
+													
 												</h:inputText>
 												<h:message style="color: red" for="nomeAluno"></h:message>
 											</div>
 											<div class="form-group">
 												<label>Matricula</label>
 
-												<h:inputText required="true" id="matricula" value="#{alunoBean.matricula}" styleClass="form-control" name="matricula"
+												<h:inputText required="true" readonly="true" id="matricula" value="#{alunoBean.matricula}" styleClass="form-control" name="matricula"
 												converterMessage="Digite apenas numeros." validatorMessage="Digite 11 caracteres numericos." requiredMessage="Digite a matricula do aluno.">
 													<f:convertNumber integerOnly="true"></f:convertNumber>
 													<f:validateLength minimum="11" maximum="11"></f:validateLength>
@@ -186,8 +191,8 @@
 								</fieldset>
 
 								<div class="form-actions">
-									<h:commandButton action="#{alunoBean.SalvarAluno()}" value="Salvar"	styleClass="btn btn-lg btn-outline btn-primary" />
-									<h:commandButton value="Limpar Campos" type="reset" styleClass="btn btn-lg btn-outline btn-danger" />
+									<h:commandButton action="#{alunoBean.updateAluno()}" value="Salvar"	styleClass="btn btn-lg btn-outline btn-primary" />
+									<h:commandButton action="#{alunoBean.limparCampos()}" value="Limpar Campos" styleClass="btn btn-lg btn-outline btn-danger" />
 								</div>
 							</h:form>
 						</div>
