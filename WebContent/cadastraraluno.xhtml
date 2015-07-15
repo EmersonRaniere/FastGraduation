@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ph="http://xmlns.jcp.org/jsf/passthrough">
+
+
+<h:head>
+
+	<title>FastGraduation</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport"
+		content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<meta name="description" content="Projeto PWebII ...." />
+	<meta name="author" content="Emerson Raniere e Jonathas Arts" />
+
+	<link rel="StyleSheet" type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/assets/css/bootstrap.css" />
+	<link rel="StyleSheet" type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/assets/fonts/font-awesome.min.css" />
+	<link rel="StyleSheet" type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/assets/css/mint-admin.css" />
+
+</h:head>
+<h:body>
+	<div id="wrapper">
+		<!-- não encontrei um equivalente para a tag nav em jsf -->
+		<nav class="navbar navbar-default navbar-static-top" role="navigation">
+		<h:form id="link_init">
+			<div class="navbar-header">
+				<!-- Link deve ir para a página principal -->
+				<h:commandLink styleClass="navbar-brand"
+					action="dashboard.jsf?faces-redirect=true">FastGraduation</h:commandLink>
+			</div>
+		</h:form> </nav>
+		
+		<nav class="navbar-default navbar-static-side" role="navigation">
+			<h:form id="bt_">
+				<div class="sidebar-collapse">
+					<ul class="nav" id="side-menu">
+						<li>
+							<div class="user-info-wrapper">
+								<div class="user-info-profile-image">
+									<!-- Imagem -->
+								</div>
+								<div class="user-info">
+									<div class="user-welcome">Bem vindo</div>
+									<div class="username">
+										<!-- usuariobean.nome -->
+										Valéria <strong>Cavalcanti</strong>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<!-- add id para ação do botão --> 
+							<h:commandLink value="Novo Concluinte" action="cadastraraluno.jsf?faces-redirect=true">
+								<i class="fa fa-plus fa-fw fa-3x"></i>
+							</h:commandLink>
+	
+						</li>
+					</ul>
+				</div>
+			</h:form>
+		</nav>
+
+
+		<div id="page-wrapper">
+			<h:messages errorStyle="color:red" layout="table" globalOnly="true" showDetails="true"/>
+			<div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header">Área para adicionar menus</h3>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-12">
+					<!-- Default wizard -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3>Adicionar Concluinte</h3>
+						</div>
+						<div class="panel-body">
+							<h:form id="formulario"  class="form-horizontal">
+								<fieldset class="step" id="step1">
+									<div></div>
+									<div class="margin-top">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>Nome</label>
+												
+												<h:inputText required="true" id="nomeAluno" value="#{alunoBean.nomeAluno}" styleClass="form-control" name="username"
+												requiredMessage="Digite o nome do aluno.">
+													<!-- validação -->
+												</h:inputText>
+												<h:message style="color: red" for="nomeAluno"></h:message>
+											</div>
+											<div class="form-group">
+												<label>Matricula</label>
+
+												<h:inputText required="true" id="matricula" value="#{alunoBean.matricula}" styleClass="form-control" name="matricula"
+												converterMessage="Digite apenas numeros." validatorMessage="Digite 11 caracteres numericos." requiredMessage="Digite a matricula do aluno.">
+													<f:convertNumber integerOnly="true"></f:convertNumber>
+													<f:validateLength minimum="11" maximum="11"></f:validateLength>
+												</h:inputText>
+												<h:message style="color: red" for="matricula"></h:message>
+											</div>
+											<div class="form-group">
+												<label>Nota</label>
+												<h:inputText required="true" id="nota" value="#{alunoBean.notaAluno}" styleClass="form-control" name="nota"
+												converterMessage="Digite apenas numeros." validatorMessage="Digite entre 0 e 100." requiredMessage="Digite a nota do aluno.">
+													<f:validateDoubleRange minimum="0" maximum="100"></f:validateDoubleRange>
+												</h:inputText>
+												<h:message style="color: red" for="nota"></h:message>
+											</div>
+											<div class="form-group">
+												<label>Data Apresentação</label>
+												<h:inputText required="true" binding="#{dataRecebida}" value="#{alunoBean.dataApresentacao}" id="data" styleClass="form-control" name="data"
+												converterMessage="Formato inválido. Ex: 14/10/1998"  requiredMessage="Digite a data de apresentação.">
+													<f:convertDateTime locale="pt_BR" timeZone="GMT-3" pattern="dd/MM/yyyy" />
+													<f:validator  validatorId="dataValidador"/>
+													<f:attribute name="dataRecebida" value="#{dataRecebida}" />
+													<f:passThroughAttributes value="#{{'placeholder':'Ex: 14/10/2015'}}" />
+												</h:inputText>
+													<!-- validação -->
+												<h:message style="color: red" for="data"></h:message>
+											</div>
+											<div class="form-group">
+												<label>Título do Trabalho</label>
+												<h:inputText required="true"  id="titulo" value="#{alunoBean.tituloProjeto}" styleClass="form-control" name="titulo"
+												requiredMessage="Digite o titulo do trabalho.">
+													<!-- validação -->
+												</h:inputText>
+												<h:message style="color: red" for="titulo"></h:message>
+											</div>
+											<div class="form-group">
+												<label>Tipo/Natureza</label>
+												<!-- pegar a enum tipotrabalho como opções -->
+												<h:selectOneMenu id="areas" styleClass="form-control">
+													<f:selectItems value="#{alunoBean.tipo}" var="status" itemLabel="#{status.label}"></f:selectItems>
+												</h:selectOneMenu>
+											</div>
+											<div class="form-group">
+												<label>Professor Orientador</label>
+
+												<!-- pegar a tabela de professores como opções -->
+												<h:selectOneMenu styleClass="form-control">
+													<f:selectItem itemValue="1" itemLabel="Valeria" />
+													<f:selectItem itemValue="2" itemLabel="Fred" />
+													<f:selectItem itemValue="3" itemLabel="Caio" />
+													<f:selectItem itemValue="4" itemLabel="Heremita" />
+												</h:selectOneMenu>
+											</div>
+											<div class="form-group">
+
+												<!-- verificar uma forma de adicionar vários ao mesmo tempo sem repetições -->
+												<label>Banca</label>
+												<h:selectOneMenu styleClass="form-control">
+													<f:selectItem itemValue="1" itemLabel="Valeria" />
+													<f:selectItem itemValue="2" itemLabel="Fred" />
+													<f:selectItem itemValue="3" itemLabel="Caio" />
+													<f:selectItem itemValue="4" itemLabel="Heremita" />
+												</h:selectOneMenu>
+
+												<h:selectOneMenu styleClass="form-control">
+													<f:selectItem itemValue="1" itemLabel="Valeria" />
+													<f:selectItem itemValue="2" itemLabel="Fred" />
+													<f:selectItem itemValue="3" itemLabel="Caio" />
+													<f:selectItem itemValue="4" itemLabel="Heremita" />
+												</h:selectOneMenu>
+
+												<h:selectOneMenu styleClass="form-control">
+													<f:selectItem itemValue="1" itemLabel="Valeria" />
+													<f:selectItem itemValue="2" itemLabel="Fred" />
+													<f:selectItem itemValue="3" itemLabel="Caio" />
+													<f:selectItem itemValue="4" itemLabel="Heremita" />
+												</h:selectOneMenu>
+											</div>
+
+										</div>
+									</div>
+								</fieldset>
+
+								<div class="form-actions">
+									<h:commandButton action="#{alunoBean.SalvarAluno()}" value="Salvar"	styleClass="btn btn-lg btn-outline btn-primary" />
+									<h:commandButton value="#{alunoBean.limparCampos()}" type="reset" styleClass="btn btn-lg btn-outline btn-danger" />
+								</div>
+							</h:form>
+						</div>
+					</div>
+					<!-- /default wizard -->
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<!-- Core Scripts - Include with every page -->
+	<script
+		src="${facesContext.externalContext.requestContextPath}/assets/js/jquery-1.10.2.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/assets/js/bootstrap.min.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/assets/js/mint-admin.js"></script>
+</h:body>
+</html>

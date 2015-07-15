@@ -29,20 +29,16 @@ public class LoginBean {
 		dao.commit();
     }
     public String fazerLogin() {
-    	System.out.println("passou 1");
     	UsuarioDAO uDAO = new UsuarioDAO();
-    	
         current = uDAO.findByLoginAndSenha(login, senha);
-//        System.out.println(current.getLogin());
+        
         if (current == null) {
-        	System.out.println("passou 1111111");
         	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuário ou senha invalido", null);
 			FacesContext.getCurrentInstance().addMessage("formIndex:login", msg);
 			return null;
         } else {
-        	System.out.println("passou 2");
         	this.loadFlashLogin(current);
-            return "dashboard";
+            return "dashboard?faces-redirect=true";
         }
     }
     

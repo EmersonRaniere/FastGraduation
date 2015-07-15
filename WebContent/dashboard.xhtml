@@ -39,7 +39,7 @@
 		<h:form id="link_init">
 			<div class="navbar-header">
 				<!-- Link deve ir para a página principal -->
-				<h:commandLink styleClass="navbar-brand" action="dashboard.xhtml">FastGraduation</h:commandLink>
+				<h:commandLink styleClass="navbar-brand" action="dashboard.jsf?faces-redirect=true">FastGraduation</h:commandLink>
 			</div>
 			<ul class="nav navbar-top-links navbar-right">
 				<li class="dropdown"><h:outputLink value="#"
@@ -84,7 +84,7 @@
 							<i class="fa fa-plus fa-fw fa-3x"></i>
 						</h:commandLink></li>
 					<li rendered="#{sessionBean.role == 1}"><h:commandLink
-							value="Botão exclusivo teste" action="cadastroAluno.jsf">
+							value="Botão exclusivo teste" action="cadastroAluno.jsf?faces-redirect=true">
 							<i class="fa fa-plus fa-fw fa-3x"></i>
 						</h:commandLink></li>
 				</ul>
