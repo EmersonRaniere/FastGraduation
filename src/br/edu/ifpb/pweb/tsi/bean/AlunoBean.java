@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
@@ -27,8 +28,22 @@ public class AlunoBean {
 //	private List<Evento> eventos;
 	private TipoDefesa tipo;
 	private List<Aluno> alunos;
+
+//	@ManagedProperty(value="#{param.selecionado}")
+	private Aluno alunoSelecionado;
 	
 	
+	public void mostrarIndividual(){
+		AlunoDAO dao = new AlunoDAO();
+		alunoSelecionado = dao.read(this.matricula);
+	}
+	
+	public String pegarAlunoIndividual(){
+		System.out.println("entrou");
+		
+		return "situacaoAluno.jsf";
+	}
+
 	public void MostrarTodos(){
 		alunos = new ArrayList<Aluno>();
 		AlunoDAO dao = new AlunoDAO();
@@ -59,7 +74,7 @@ public class AlunoBean {
 		}
 		return false;
 	}
-	
+
 	public void CadastrarNoBanco(Aluno alu){
 		AlunoDAO dao = new AlunoDAO();
 		dao.begin();
@@ -133,5 +148,11 @@ public class AlunoBean {
 	public void setDataApresentacao(Date dataApresentacao) {
 		this.dataApresentacao = dataApresentacao;
 	}
-	
+	public Aluno getAlunoSelecionado() {
+		return alunoSelecionado;
+	}
+	public void setAlunoSelecionado(Aluno alunoSelecionado) {
+		this.alunoSelecionado = alunoSelecionado;
+	}
+	 
 }
