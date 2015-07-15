@@ -8,7 +8,8 @@
 	xmlns:ph="http://xmlns.jcp.org/jsf/passthrough">
 	
 <f:metadata>
-	<f:event type="preRenderView" listener="#{alunoBean.MostrarTodos}"/></f:metadata>
+	<f:event type="preRenderView" listener="#{alunoBean.MostrarTodos}"/>
+</f:metadata>
 <h:head>
 	<title>FastGraduation</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -99,31 +100,35 @@
 							<div class="table-responsive">
 								<div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
 									<!-- Row filtro e pesquisar removidas -->
-									<h:dataTable var="ab" value="#{alunoBean.alunos}" 
-									styleClass="table table-striped table-bordered table-hover dataTable no-footer">
-										<h:column >
-											<f:facet name="header">Matricula</f:facet>
-											 <h:outputLink value="#{ab.matricula}">#{ab.matricula}</h:outputLink> 
-										</h:column>
-										<h:column>	
-											<f:facet name="header">Nome</f:facet> 
-											<h:outputText value="#{ab.nomeAluno}"/> 
-										</h:column>
-										<h:column>	
-											<f:facet name="header">Nota</f:facet> 
-											<h:outputText value="#{ab.notaAluno}"/>
-										</h:column>
-										<h:column>	
-											<f:facet name="header">Titulo do Projeto</f:facet> 
-											<h:outputText value="#{ab.tituloProjeto}"/> 
-										</h:column>
-										<h:column>	
-											<f:facet name="header">Data de Apresentação</f:facet> 
-											<h:outputText value="#{ab.dataApresentacao}">
-								    			<f:convertDateTime pattern="dd/MM/yyyy"/>
-								    		</h:outputText>
-										</h:column>
-									</h:dataTable>
+									<h:form id="formPrincipal">
+										<h:dataTable var="ab" value="#{alunoBean.alunos}" 
+										styleClass="table table-striped table-bordered table-hover dataTable no-footer">
+											<h:column >
+												<f:facet name="header">Matricula</f:facet>
+													 <h:outputLink id="irIndividual" value="#{alunoBean.pegarAlunoIndividual()}">
+								                		<f:param name="matricula" value="#{ab.matricula}" />#{ab.matricula}
+								                    </h:outputLink>
+											</h:column>
+											<h:column>	
+												<f:facet name="header">Nome</f:facet> 
+												<h:outputText value="#{ab.nomeAluno}"/> 
+											</h:column>
+											<h:column>	
+												<f:facet name="header">Nota</f:facet> 
+												<h:outputText value="#{ab.notaAluno}"/>
+											</h:column>
+											<h:column>	
+												<f:facet name="header">Titulo do Projeto</f:facet> 
+												<h:outputText value="#{ab.tituloProjeto}"/> 
+											</h:column>
+											<h:column>	
+												<f:facet name="header">Data de Apresentação</f:facet> 
+												<h:outputText value="#{ab.dataApresentacao}">
+									    			<f:convertDateTime pattern="dd/MM/yyyy"/>
+									    		</h:outputText>
+											</h:column>
+										</h:dataTable>
+									</h:form> 
 								</div>
 							</div>
 						</div>

@@ -6,7 +6,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
-
+<f:metadata>
+	<f:viewParam name="matricula" value="#{alunoBean.matricula}"></f:viewParam>
+	<f:event type="preRenderView" listener="#{alunoBean.mostrarIndividual}"/>
+</f:metadata>
 <h:head>
 
 	<title>FastGraduation</title>
@@ -76,21 +79,24 @@
 						<!-- Dados Concluinte Escolhido -->
 						<div class="panel-heading">
 							<h3>
-								<div class="col-md-8">Nome do Aluno</div>
-								<div class="col-md-4">Matricula</div>
+								<div class="col-md-8">#{alunoBean.alunoSelecionado.nomeAluno}</div>
+								<div class="col-md-2">#{alunoBean.alunoSelecionado.matricula}</div>
 							</h3>
 							
 							<br /> <br /> <!-- Ajustar br no css -->
 							
 							<blockquote>
-								<div class="col-md-2">
-									<small>Data Apresentação</small>00/00/2015
+								<div class="col-md-3">
+									<small>Data Apresentação</small>#{alunoBean.alunoSelecionado.dataApresentacao}
 								</div>
-								<div class="col-md-6">
-									<small>Título do Trabalho</small>Trabalho muito bom
+								<div class="col-md-3">
+									<small>Título do Trabalho</small>#{alunoBean.alunoSelecionado.tituloProjeto}
 								</div>
-								<div class="col-md-4">
-									<small>Tipo/Natureza</small>Extensão
+								<div class="col-md-3">
+									<small>Tipo/Natureza</small>#{alunoBean.alunoSelecionado.tipo}
+								</div>
+								<div class="col-md-3">
+									<small>Orientador</small>#{alunoBean.alunoSelecionado.orientador}
 								</div>
 							</blockquote>
 						</div>
