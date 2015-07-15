@@ -1,5 +1,6 @@
 package br.edu.ifpb.pweb.tsi.bean;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,7 +16,15 @@ public class LoginBean {
 	private String login;
     private String senha;
     private Usuario current;
-
+    
+    @PostConstruct
+    public void init(){
+    	Usuario usuario = new Usuario("valeria.cavalcanti", "tsi123");
+		UsuarioDAO dao = new UsuarioDAO();
+		dao.begin();
+		dao.create(usuario);
+		dao.commit();
+    }
     public String fazerLogin() {
     	UsuarioDAO uDAO = new UsuarioDAO();
         current = uDAO.findByLoginAndSenha(login, senha);

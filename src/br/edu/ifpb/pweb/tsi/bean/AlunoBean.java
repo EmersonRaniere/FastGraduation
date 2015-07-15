@@ -42,12 +42,31 @@ public class AlunoBean {
 		
 	}
 	
+	public Boolean verificarExistencia(Aluno alu){
+		AlunoDAO dao = new AlunoDAO();
+		Aluno aluBD = new Aluno();
+		
+		List<Aluno> alunos = dao.readAll();
+		if(alunos.isEmpty()) {
+			return true;
+		}else {
+			aluBD = dao.findByCredential(alu.getMatricula());
+			if(aluBD == null){
+				return true;
+			}else if((alu.getMatricula()).equals(aluBD.getMatricula())){
+				return false;
+			}
+		}
+		return false;
+	}
+	
 	public void CadastrarNoBanco(Aluno alu){
 		AlunoDAO dao = new AlunoDAO();
 		dao.begin();
 		dao.create(alu);
 		dao.commit();
 	}
+	
 	public String SalvarAluno(){
 		Aluno alu = new Aluno();
 		alu.setDataApresentacao(this.dataApresentacao);
@@ -55,27 +74,18 @@ public class AlunoBean {
 		alu.setNotaAluno(this.notaAluno);
 		alu.setNomeAluno(this.nomeAluno);
 		alu.setTituloProjeto(this.tituloProjeto);
-		System.out.println(alu.getDataApresentacao());
-		CadastrarNoBanco(alu);
-		
-//		Aluno a = dao.read(matricula);
-//
-//		
-//		
-//		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, a.getNomeAluno(), "FUNFOU!");
-//		FacesContext.getCurrentInstance().addMessage(null, msg);
-//		
-		return "dashboard?faces-redirect=true";
+
+		Boolean ok = verificarExistencia(alu);
+		if (ok){
+			CadastrarNoBanco(alu);
+			return "dashboard?faces-redirect=true";
+		}else {
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "A matricula já existe!", null);
+			FacesContext.getCurrentInstance().addMessage("formulario:matricula", msg);
+			return null;
+		}
 	}
 	
-	public void Exibir(){
-		AlunoDAO dao = new AlunoDAO();
-		Aluno a = dao.read(matricula);
-		
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, a.getNomeAluno(), "FUNFOU!");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		
-	}
 	
 	public String getMatricula() {
 		return matricula;
