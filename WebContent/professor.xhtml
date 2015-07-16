@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ph="http://xmlns.jcp.org/jsf/passthrough">
+
+#{sessionBean.check()}
+
+<f:metadata>
+	<f:viewParam name="matricula" value="#{profBean.matricula}"></f:viewParam>
+	<f:event type="preRenderView" listener="#{profBean.MostrarTodos}"/>
+</f:metadata>
+<h:head>
+
+	<title>FastGraduation</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport"
+		content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<meta name="description" content="Projeto PWebII ...." />
+	<meta name="author" content="Emerson Raniere e Jonathas Arts" />
+
+	<link rel="StyleSheet" type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/assets/css/bootstrap.css" />
+	<link rel="StyleSheet" type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/assets/fonts/font-awesome.min.css" />
+	<link rel="StyleSheet" type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/assets/css/mint-admin.css" />
+
+</h:head>
+<h:body>
+	<div id="wrapper">
+		<!-- não encontrei um equivalente para a tag nav em jsf -->
+		<nav class="navbar navbar-default navbar-static-top" role="navigation">
+		<h:form id="link_init">
+			<div class="navbar-header">
+				<!-- Link deve ir para a página principal -->
+				<h:commandLink styleClass="navbar-brand"
+					action="dashboard.jsf?faces-redirect=true">FastGraduation</h:commandLink>
+			</div>
+		</h:form> </nav>
+		
+		<nav class="navbar-default navbar-static-side" role="navigation">
+			<h:form id="bt_">
+				<div class="sidebar-collapse">
+					<ul class="nav" id="side-menu">
+						<li>
+							<div class="user-info-wrapper">
+								<div class="user-info-profile-image">
+									<!-- Imagem -->
+								</div>
+								<div class="user-info">
+									<div class="user-welcome">Olá,</div>
+									<div class="username">
+									<strong>#{sessionBean.usuario.login}</strong>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<h:commandLink value="Novo Concluinte" action="cadastraraluno.jsf">
+								<i class="fa fa-plus fa-fw fa-3x"></i>
+							</h:commandLink></li>
+						<li>
+							<h:commandLink value="Novo Professor " action="cadastrarprofessor.jsf">
+								<i class="fa fa-plus fa-fw fa-3x"></i>
+							</h:commandLink></li>
+						<li rendered="#{sessionBean.role == 1}">
+							<h:commandLink value="Botão exclusivo teste" action="cadastraraluno.jsf">
+								<i class="fa fa-bar-chart-o fa-3x"></i>
+							</h:commandLink>
+						</li>
+					</ul>
+				</div>
+			</h:form>
+		</nav>
+
+
+		<div id="page-wrapper">
+			<h:messages errorStyle="color:red" layout="table" globalOnly="true" showDetails="true"/>
+			
+			<div class="row">
+				<div class="col-lg-12">
+					<!-- Default wizard -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3>Adicionar Professor</h3>
+						</div>
+						<div class="panel-body">
+							<h:form id="formularioProf"  class="form-horizontal">
+								<fieldset class="step" id="step1">
+									<div></div>
+									<div class="margin-top">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>Nome</label>
+												
+												<h:inputText required="true" id="nome" value="#{profBean.nome}" styleClass="form-control" name="username"
+												requiredMessage="Digite o nome do professor.">
+												</h:inputText>
+												<h:message style="color: red" for="nome"></h:message>
+											</div>
+											<div class="form-group">
+												<label>Matricula</label>
+
+												<h:inputText required="true" id="matricula" value="#{profBean.matricula}" styleClass="form-control" name="matricula"
+												converterMessage="Digite apenas numeros." validatorMessage="Digite 11 caracteres numericos." requiredMessage="Digite a matricula do professor">
+													<f:convertNumber integerOnly="true"></f:convertNumber>
+													<f:validateLength minimum="11" maximum="11"></f:validateLength>
+												</h:inputText>
+												<h:message style="color: red" for="matricula"></h:message>
+											</div>
+										</div>
+									</div>
+								</fieldset>
+
+								<div class="form-actions">
+									<h:commandButton action="#{profBean.SalvarProfessor()}" value="Salvar"	styleClass="btn btn-lg btn-outline btn-primary" />
+									<h:commandButton value="Limpar" type="reset" styleClass="btn btn-lg btn-outline btn-danger" />
+								</div>
+							</h:form>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Exibir Professores -->		
+				
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3>Professores Cadastrados</h3>
+						</div>
+						<div class="panel-body">
+							<div class="table-responsive">
+								<div id="dataTables-example_wrapper"
+									class="dataTables_wrapper form-inline" role="grid">
+									<!-- Row filtro e pesquisar removidas -->
+									<h:form id="formExcluir">
+										<h:dataTable var="p" value="#{profBean.professores}"
+											rendered="#{not empty profBean.professores}"
+											styleClass="table table-striped table-bordered table-hover dataTable no-footer"
+											columnClasses="col-md-2,col-md-4,col-md-4,col-md-1">
+											<h:column>
+												<f:facet name="header">Matricula</f:facet>
+												<h:outputLink id="irIndividual" value="treta">
+													<f:param name="matricula" value="#{p.matricula}" />#{p.matricula}
+									            </h:outputLink>
+											</h:column>
+	
+											<h:column>
+												<f:facet name="header">Nome</f:facet>
+												<h:outputText value="#{p.nome}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">Editar</f:facet>
+												<div class="col-xs-6">
+													<h:outputLink id="editarIndividual"	>
+														<f:param name="matricula" value="#{p.matricula}">
+															<i class="fa fa-list"></i>
+														</f:param>
+													</h:outputLink>
+												</div>
+											</h:column>
+	
+											<h:column>
+												<h:form id="deletarUsuario">
+													<f:facet name="header">Excluir</f:facet>
+														<div class="col-xs-6">
+															<!-- CRIAR DELETAR ! -->
+														</div>
+												</h:form>
+											</h:column>
+											
+	
+										</h:dataTable>
+								</h:form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<!-- Core Scripts - Include with every page -->
+	<script
+		src="${facesContext.externalContext.requestContextPath}/assets/js/jquery-1.10.2.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/assets/js/bootstrap.min.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script
+		src="${facesContext.externalContext.requestContextPath}/assets/js/mint-admin.js"></script>
+</h:body>
+</html>

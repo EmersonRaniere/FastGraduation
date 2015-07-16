@@ -50,6 +50,7 @@ public class SessionBean {
 	public void check(){
 	    if (this.getRole() == 0) {
 	        try {
+//	        	FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -57,6 +58,9 @@ public class SessionBean {
 	    }
 	}
 
+	public String pegarLogin(){
+		return usuario.getLogin();
+	}
 	
 	public Usuario getUsuario() {
 		return usuario;

@@ -15,7 +15,8 @@ import br.edu.ifpb.pweb.tsi.model.Usuario;
 public class LoginBean {
 	
 	private String login;
-    private String senha;
+    private String senha, senhaAntiga, senhaNova, senhaNovaIgual;
+    
     private Usuario current;
     
     @PostConstruct
@@ -28,6 +29,25 @@ public class LoginBean {
 		dao.create(usuario2);
 		dao.commit();
     }
+//    public String mudarSenha(){
+//    	UsuarioDAO uDao = new UsuarioDAO();
+//    	current = uDao.findByLoginAndSenha(login, senha);
+//    	
+//    	if (current == null) {
+//        	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuário não encontrado", null);
+//			FacesContext.getCurrentInstance().addMessage("formAlterarSenha:login", msg);
+//			return null;
+//    	}else if (!((this.senhaNova).equals(senhaNovaIgual))){
+//    		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senha nova divergem.", null);
+//			FacesContext.getCurrentInstance().addMessage("formAlterarSenha:login", msg);
+//			return null;
+//        } else {
+//        	uDao.changePassword(current.getId(), senhaNova);
+//        	this.loadFlashLogin(current);
+//            return "dashboard";
+//        }
+//    }
+    
     public String fazerLogin() {
     	UsuarioDAO uDAO = new UsuarioDAO();
         current = uDAO.findByLoginAndSenha(login, senha);
@@ -38,7 +58,7 @@ public class LoginBean {
 			return null;
         } else {
         	this.loadFlashLogin(current);
-            return "dashboard?faces-redirect=true";
+            return "dashboard";
         }
     }
     
@@ -65,6 +85,24 @@ public class LoginBean {
 	}
 	public void setCurrent(Usuario current) {
 		this.current = current;
+	}
+	public String getSenhaAntiga() {
+		return senhaAntiga;
+	}
+	public void setSenhaAntiga(String senhaAntiga) {
+		this.senhaAntiga = senhaAntiga;
+	}
+	public String getSenhaNova() {
+		return senhaNova;
+	}
+	public void setSenhaNova(String senhaNova) {
+		this.senhaNova = senhaNova;
+	}
+	public String getSenhaNovaIgual() {
+		return senhaNovaIgual;
+	}
+	public void setSenhaNovaIgual(String senhaNovaIgual) {
+		this.senhaNovaIgual = senhaNovaIgual;
 	}
    
 }

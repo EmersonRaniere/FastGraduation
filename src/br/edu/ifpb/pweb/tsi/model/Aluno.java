@@ -35,7 +35,7 @@ public class Aluno {
 	private Date dataApresentacao;
 	
 	@OneToMany
-	@JoinTable(name="bancaProfessor", joinColumns={@JoinColumn(name="idAluno", referencedColumnName="matricula")}, inverseJoinColumns={@JoinColumn(name="idProfessor", referencedColumnName="id")})
+	@JoinTable(name="bancaProfessor", joinColumns={@JoinColumn(name="idAluno", referencedColumnName="matricula")}, inverseJoinColumns={@JoinColumn(name="idProfessor", referencedColumnName="matricula")})
 	private List<Professor> banca;
 	
 	@OneToMany

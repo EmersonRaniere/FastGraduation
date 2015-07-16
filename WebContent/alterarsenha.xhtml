@@ -7,6 +7,11 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ph="http://xmlns.jcp.org/jsf/passthrough">
 
+#{sessionBean.check()}
+
+<f:metadata>
+	<f:viewParam name="login" value="#{sessionBean.pegarlogin()}"></f:viewParam>
+</f:metadata>
 <h:head>
 
 	<title>FastGraduation</title>
@@ -27,19 +32,38 @@
 <h:body>
 	
 	 <div class="container">
+
+		<!-- Adicionar Modal para mensagens de erro -->
+
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
 				<div class="login-panel panel panel-default">
-					<div class="panel-heading text-center">
-                    	<h1 class="large-error">404</h1>
-                        <h4>Oops, ocorreu um erro no sistema.</h4>
-                    </div>
 					<div class="panel-body">
-						<h:form id="formIndex" role="form">
+						<h:form id="formAlterarSenha" role="form">
 							<fieldset>
-								<div class="panel-body text-center">
-	                        		<h:commandLink styleClass="btn btn-block btn-primary" action="dashboard.jsf?faces-redirect=true">Voltar para página principal</h:commandLink>
-	                        	</div>
+								<div class="form-group">
+									<h:inputText id="senhaAntiga" value="#{loginBean.senhaAntiga}" styleClass="form-control" ph:placeholder="Senha antiga">
+										<!-- validação -->
+									</h:inputText>
+									<h:message style="color: red" for="senhaAntiga"></h:message>
+									
+								</div>
+								<div class="form-group">
+									<h:inputText id="senhaNova" value="#{loginBean.senhaNova}" styleClass="form-control" ph:placeholder="Senha nova">
+										<!-- validação -->
+									</h:inputText>
+									<h:message style="color: red" for="senhaNova"></h:message>
+								</div>
+								<div class="form-group">
+									<h:inputText id="senhaNovaIgual" value="#{loginBean.senhaNovaIgual}" styleClass="form-control" ph:placeholder="Repita a nova senha.">
+										<!-- validação -->
+									</h:inputText>
+									<h:message style="color: red" for="senhaNovaIgual"></h:message>
+								</div>
+				
+								<h:commandButton styleClass="btn btn-lg btn-primary btn-block" value="Entrar" action="dashboard.jsf">
+								</h:commandButton>
+								
 							</fieldset>
 						</h:form>
 					</div>
@@ -47,6 +71,7 @@
 			</div>
 		</div>
 	</div>
+	
 
         <!-- Core Scripts - Include with every page -->
         <script src="js/jquery-1.10.2.js"></script>
