@@ -22,12 +22,24 @@ public class Evento {
 	private Aluno codigoAluno;
 	
 	private Date dataEvento;
+	private boolean encerrado;
 	
 	@OneToMany
 	private List<Anotacoes> comentarios;
 	
 	@Enumerated(EnumType.STRING)
 	private TipoEvento tipo;
+	
+	public Evento(){};
+	
+	public Evento(Aluno codigoAluno, Date dataEvento, boolean encerrado,
+			TipoEvento tipo) {
+		super();
+		this.codigoAluno = codigoAluno;
+		this.dataEvento = dataEvento;
+		this.encerrado = encerrado;
+		this.tipo = tipo;
+	}
 
 	public int getId() {
 		return id;
@@ -68,7 +80,15 @@ public class Evento {
 	public void setTipo(TipoEvento tipo) {
 		this.tipo = tipo;
 	}
-	
 
+	public boolean isencerrado() {
+		return encerrado;
+	}
+
+	public void setencerrado(boolean encerrado) {
+		this.encerrado = encerrado;
+	}
+	
+	
 	
 }
