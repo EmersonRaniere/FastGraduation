@@ -132,14 +132,14 @@
 									<div class="panel panel-default">
 										<div class="panel-heading">
 											<h4 class="panel-title">
-												<h:outputLink value="#collapseOne">
+												<h:outputLink value="##{evento.tipo}">
 													#{evento.tipo.getLabel()}
 	                                            	<f:passThroughAttribute name="data-toggle" value="collapse" />
 													<f:passThroughAttribute name="data-parent" value="#accordion" />
 												</h:outputLink>
 											</h4>
 										</div>
-										<div id="collapseOne" class="panel-collapse collapse"
+										<div id="#{evento.tipo}" class="panel-collapse collapse"
 											style="height: auto;">
 											<div class="panel-body">
 												<div class="col-xs-6 col-md-4">
@@ -163,11 +163,10 @@
 								
 								<br/>
 																
-								<h:commandButton value="Novo Evento" styleClass="btn btn-primary btn-lg btn-block btn-outline">
+								<h:commandButton rendered="#{eventoBean.fim==0}" value="Novo Evento" styleClass="btn btn-primary btn-lg btn-block btn-outline">
 									<f:passThroughAttribute name="data-toggle" value="modal" />
 									<f:passThroughAttribute name="data-target" value=".bs-example-modal-lg" />
 								</h:commandButton>
-
 							</div>
 						</div>
 						</h:form>

@@ -1,14 +1,14 @@
 package br.edu.ifpb.pweb.tsi.model;
 
 public enum TipoEvento {
-	ev_abertura_processo_colacao("Abertura Processo de Colação"), 
-	ev_abertura_processo_estagio("Abertura Processo de Estágio"), 
-	ev_recebido_ce_pora_ctsi("Processo Recebido da Coord. de Estágio"), 
-	ev_envio_ctsi_para_professor("Processo Enviado para Prof. Orientador"), 
-	ev_recebido_professor_para_ctsi("Processo Recebido do Prof. Orientador"), 
-	ev_envio_ctsi_para_ce("Processo Enviado Para Coord. de Estágio"), 
-	ev_envio_ctsi_para_cca("Processo de Colação Enviado Para CCA"),
-	ev_processo_encerrado("Processo Encerrado");
+	ev_abertura_processo_colacao("Abertura_Processo_de_Colação"), 
+	ev_abertura_processo_estagio("Abertura_Processo_de_Estágio"), 
+	ev_recebido_ce_pora_ctsi("Processo_Recebido_da_Coord_de_Estágio"), 
+	ev_envio_ctsi_para_professor("Processo_Enviado_para_Prof_Orientador"), 
+	ev_recebido_professor_para_ctsi("Processo_Recebido_do_Prof_Orientador"), 
+	ev_envio_ctsi_para_ce("Processo_Enviado_Para_Coord-de_Estágio"), 
+	ev_envio_ctsi_para_cca("Processo_de_Colação_Enviado_Para_CCA"),
+	ev_processo_encerrado("Processo_Encerrado");
 	
 	private String label;
 	
@@ -19,5 +19,6 @@ public enum TipoEvento {
 	public String getLabel(){
 		return label;
 	}
+	
 	
 }

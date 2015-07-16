@@ -7,8 +7,6 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ph="http://xmlns.jcp.org/jsf/passthrough">
 
-
-
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -48,21 +46,13 @@
 													<h:message style="color: red" for="data"></h:message>
 												</div>
 
-												<div class="form-group">
-													<label>Evento Encerrado</label>
-													<h:selectBooleanCheckbox id="encerrado"
-														value="#{eventoBean.encerrado}" />
-													Remember Me
-													<h:message style="color: red" for="encerrado"></h:message>
-												</div>
-
 											</div>
 										</div>
 									</fieldset>
 							</div>
 							<div class="panel-footer">
 								<div class="form-actions">
-									<h:commandButton action="#{eventoBean.salvarEvento()}"
+									<h:commandButton actionListener="#{eventoBean.salvarEvento()}"
 										value="Salvar" styleClass="btn btn-lg btn-outline btn-primary" />
 									<h:commandButton value="Limpar" type="reset"
 										styleClass="btn btn-lg btn-outline btn-danger" />
