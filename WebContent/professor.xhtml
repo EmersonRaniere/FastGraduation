@@ -11,6 +11,7 @@
 
 <f:metadata>
 	<f:viewParam name="matricula" value="#{profBean.matricula}"></f:viewParam>
+	<f:viewParam name="nome" value="#{profBean.nome}"></f:viewParam>
 	<f:event type="preRenderView" listener="#{profBean.MostrarTodos}"/>
 </f:metadata>
 <h:head>
@@ -140,15 +141,12 @@
 									class="dataTables_wrapper form-inline" role="grid">
 									<!-- Row filtro e pesquisar removidas -->
 									<h:form id="formExcluir">
-										<h:dataTable var="p" value="#{profBean.professores}"
-											rendered="#{not empty profBean.professores}"
+										<h:dataTable var="p" value="#{profBean.professores}" rendered="#{not empty profBean.professores}"
 											styleClass="table table-striped table-bordered table-hover dataTable no-footer"
-											columnClasses="col-md-2,col-md-4,col-md-4,col-md-1">
+											columnClasses="col-md-1,col-md-7,col-md-2,col-md-2">
 											<h:column>
 												<f:facet name="header">Matricula</f:facet>
-												<h:outputLink id="irIndividual" value="treta">
-													<f:param name="matricula" value="#{p.matricula}" />#{p.matricula}
-									            </h:outputLink>
+												<h:outputText value="#{p.matricula}" />
 											</h:column>
 	
 											<h:column>
@@ -157,11 +155,11 @@
 											</h:column>
 											<h:column>
 												<f:facet name="header">Editar</f:facet>
-												<div class="col-xs-6">
+												<div class="col-xs-1">
 													<h:outputLink id="editarIndividual"	>
-														<f:param name="matricula" value="#{p.matricula}">
+														<f:param name="matricula" value="#{p.matricula}"/>
+														<f:param name="nome" value="#{p.nome}"/>
 															<i class="fa fa-list"></i>
-														</f:param>
 													</h:outputLink>
 												</div>
 											</h:column>
@@ -169,7 +167,7 @@
 											<h:column>
 												<h:form id="deletarUsuario">
 													<f:facet name="header">Excluir</f:facet>
-														<div class="col-xs-6">
+														<div class="col-xs-1">
 															<!-- CRIAR DELETAR ! -->
 														</div>
 												</h:form>

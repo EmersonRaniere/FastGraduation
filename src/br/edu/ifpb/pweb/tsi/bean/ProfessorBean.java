@@ -65,10 +65,7 @@ public class ProfessorBean {
 	public String pegarProfessorIndividual(){
 		return "professor.jsf";
 	}
-	
-//	public String editarProfessorIndividual(){
-//		return "editaraluno.jsf";
-//	}
+
 	public void MostrarTodos(){
 		professores = new ArrayList<Professor>();
 		ProfessorDAO dao = new ProfessorDAO();

@@ -48,8 +48,8 @@ public class UsuarioDAO extends DAO<Usuario>{
 				System.out.println("retorno > 0");
 				Usuario user = (Usuario) retorno.get(0);
 				
-				Query p = manager.createQuery("update Usuario SET senha = :senhaNova where id = :id");
-				p.setParameter("senha", senhaNova);
+				Query p = manager.createQuery("update Usuario set senha = :senhaNova where id = :id");
+				p.setParameter("senhaNova", senhaNova);
 				p.setParameter("id", id);
 				
 				return user;
