@@ -47,9 +47,6 @@ public class AlunoBean {
 		this.notaAluno = alunoSelecionado.getNotaAluno();
 		this.tipo = alunoSelecionado.getTipo();
 		this.dataApresentacao = alunoSelecionado.getDataApresentacao();
-//		this.orientador = alunoSelecionado.get();
-//		this.nomeAluno = alunoSelecionado.getNomeAluno();
-//		this.nomeAluno = alunoSelecionado.getNomeAluno();
 	}
 	
 	public String pegarAlunoIndividual(){
@@ -118,11 +115,8 @@ public class AlunoBean {
 	}
 	
 	public String excluirAluno(Aluno alu){
-		
 		AlunoDAO dao = new AlunoDAO();
 		dao.begin();	
-		alu = dao.read(this.getMatricula());
-		
 		dao.delete(alu);
 		dao.commit();
 		return null;

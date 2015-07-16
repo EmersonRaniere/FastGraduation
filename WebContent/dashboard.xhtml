@@ -88,8 +88,8 @@
 							<h:commandLink value="Novo Professor " action="professor.jsf?faces-redirect=true">
 								<i class="fa fa-plus fa-fw fa-3x"></i>
 							</h:commandLink></li>
-						<li rendered="#{sessionBean.role == 1}">
-							<h:commandLink value="Botão exclusivo teste" action="cadastraraluno.jsf">
+						<li >
+							<h:commandLink rendered="#{sessionBean.role == 1}" value="Relatorios" action="errorPage.jsf?faces-redirect=true">
 								<i class="fa fa-bar-chart-o fa-3x"></i>
 							</h:commandLink>
 						</li>
@@ -152,10 +152,10 @@
 										</h:column>
 
 										<h:column>
-											<h:form id="deletarUsuario">
 												<f:facet name="header">Excluir</f:facet>
+												<h:form id="deletarUsuario">
 													<div class="col-xs-6">
-													<h:commandLink action="#{sessionBean.excluirAluno(ab)}" value="x">
+													<h:commandLink action="#{alunoBean.excluirAluno(ab)}" >
 														<i class="fa fa-times"></i>
 													</h:commandLink>
 														<!-- CRIAR DELETAR ! -->
