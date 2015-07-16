@@ -33,7 +33,7 @@ public class DataValidator implements Validator {
     	Date dataRecebida ;
 		try {
 			dataRecebida = (Date) formatter.parse(data);
-			 if (dataRecebida.before(today)) { // A data tem que ser posterior a data do dia. O metodo after, significa anterior a data do dia. 
+			 if (dataRecebida.after(today)) { // A data tem que ser posterior a data do dia. O metodo after, significa anterior a data do dia. 
 		        	dataRecebidaComponent.setValid(false);
 		            throw new ValidatorException(new FacesMessage(
 		                FacesMessage.SEVERITY_ERROR, "A data não pode ser posterior a data de hoje.", null));
