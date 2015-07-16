@@ -5,19 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-
-import org.hibernate.jpa.criteria.predicate.IsEmptyPredicate;
 
 import br.edu.ifpb.pweb.tsi.dao.AlunoDAO;
 import br.edu.ifpb.pweb.tsi.dao.EventoDAO;
 import br.edu.ifpb.pweb.tsi.model.Aluno;
 import br.edu.ifpb.pweb.tsi.model.Evento;
-import br.edu.ifpb.pweb.tsi.model.TipoDefesa;
 import br.edu.ifpb.pweb.tsi.model.TipoEvento;
 
 @ManagedBean(name = "eventoBean")
@@ -41,21 +36,37 @@ public class EventoBean {
 		System.out.println("selecionado " + matriculaAluno);
 	}
 	
-	public void salvarEvento() {
+	public String salvarEvento() {
 		Evento ev = new Evento();
 		
-		ev.setCodigoAluno(this.alu);
+		ev.setCodigoAluno(this.alu.getMatricula());
 		ev.setDataEvento(this.dataEvento);
 		ev.setTipo(this.tipo);
-		ev.setencerrado(this.encerrado);
 
 		EventoDAO dao = new EventoDAO();
 		dao.begin();
 		dao.create(ev);
+		dao.commit();
 		
 		
 		System.out.println(dao.read(ev.getId()));
-		dao.commit();
+		this.alu.addEvento(ev);
+		
+		AlunoDAO aludao = new AlunoDAO();
+		aludao.begin();
+		
+		Aluno temp = new Aluno();
+		temp = (aludao.read(alu.getMatricula()));
+		if ((temp != null) && ((temp.getMatricula()) == ev.getCodigoAluno() )){
+			aludao.update(this.alu);
+			aludao.commit();
+		}else {
+			System.out.println("DA ERROR ");
+			aludao.commit();
+		}
+		
+		
+		return null;
 	}
 
 	public void editarEvento() {
@@ -68,10 +79,10 @@ public class EventoBean {
 
 	public String selecionaTipo() {
 		
-		List<Evento> eventos = alu.getEventos();
+		List<Evento> eventos = this.pegaEventos();
 		
 		if(!eventos.isEmpty()){
-			
+			System.out.println(eventos);
 			this.tipo = eventos.get(eventos.size()-1).getTipo();
 			
 			switch (this.tipo) {
@@ -123,7 +134,9 @@ public class EventoBean {
 		return this.tipo.getLabel();
 	}
 
-	
+	public List<Evento> pegaEventos(){
+		return this.alu.getEventos();
+	}
 
 	public Aluno getAlu() {
 		return alu;

@@ -108,7 +108,9 @@ public class Aluno {
 	public void setTipo(TipoDefesa tipo) {
 		this.tipo = tipo;
 	}
-	
+	public void addEvento(Evento e){
+		this.eventos.add(e);
+	}
 	
 	
 }

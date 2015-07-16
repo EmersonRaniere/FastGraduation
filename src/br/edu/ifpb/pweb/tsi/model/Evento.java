@@ -3,6 +3,7 @@ package br.edu.ifpb.pweb.tsi.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,14 +13,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import sun.security.util.Length;
+
 @Entity
 public class Evento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@ManyToOne
-	private Aluno codigoAluno;
+	@Column(length=13)
+	private String codigoAluno;
 	
 	private Date dataEvento;
 	private boolean encerrado;
@@ -32,7 +35,7 @@ public class Evento {
 	
 	public Evento(){};
 	
-	public Evento(Aluno codigoAluno, Date dataEvento, boolean encerrado,
+	public Evento(String codigoAluno, Date dataEvento, boolean encerrado,
 			TipoEvento tipo) {
 		super();
 		this.codigoAluno = codigoAluno;
@@ -49,11 +52,11 @@ public class Evento {
 		this.id = id;
 	}
 
-	public Aluno getCodigoAluno() {
+	public String getCodigoAluno() {
 		return codigoAluno;
 	}
 
-	public void setCodigoAluno(Aluno codigoAluno) {
+	public void setCodigoAluno(String codigoAluno) {
 		this.codigoAluno = codigoAluno;
 	}
 
@@ -75,6 +78,10 @@ public class Evento {
 
 	public TipoEvento getTipo() {
 		return tipo;
+	}
+	
+	public String getTipoEvento(){
+		return tipo.getLabel();
 	}
 
 	public void setTipo(TipoEvento tipo) {

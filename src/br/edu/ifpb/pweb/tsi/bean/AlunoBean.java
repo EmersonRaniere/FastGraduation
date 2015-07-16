@@ -6,15 +6,14 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 
 import br.edu.ifpb.pweb.tsi.dao.AlunoDAO;
 import br.edu.ifpb.pweb.tsi.model.Aluno;
+import br.edu.ifpb.pweb.tsi.model.Evento;
 import br.edu.ifpb.pweb.tsi.model.TipoDefesa;
-
-import com.sun.javafx.collections.MappingChange.Map;
 
 @ManagedBean(name = "alunoBean")
 @RequestScoped
@@ -27,11 +26,12 @@ public class AlunoBean {
 	private Date dataApresentacao;
 //	private Professor orientador;
 //	private List<Professor> banca;
+//	@ManagedProperty(value="eventoBean")
 //	private List<Evento> eventos;
+
 	private TipoDefesa tipo;
 	private List<Aluno> alunos;
-
-//	@ManagedProperty(value="#{param.selecionado}")
+	
 	public Aluno alunoSelecionado;
 	
 	
@@ -200,5 +200,14 @@ public class AlunoBean {
 	public void setAlunoSelecionado(Aluno alunoSelecionado) {
 		this.alunoSelecionado = alunoSelecionado;
 	}
+//	public List<Evento> getEventos() {
+//		return eventos;
+//	}
+//	public void setEventos(List<Evento> eventos) {
+//		this.eventos = eventos;
+//	}
+
+	
+	
 	 
 }
