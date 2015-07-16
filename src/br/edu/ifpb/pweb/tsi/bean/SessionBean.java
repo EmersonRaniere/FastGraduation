@@ -48,7 +48,6 @@ public class SessionBean {
 	public String excluirAluno(Aluno alu){
 		AlunoDAO dao = new AlunoDAO();
 		dao.begin();	
-//		alu = dao.read(alu.getMatricula());
 		dao.delete(alu);
 		dao.commit();
 		return null;
@@ -62,7 +61,6 @@ public class SessionBean {
 	public void check(){
 	    if (this.getRole() == 0) {
 	        try {
-//	        	FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -74,11 +72,6 @@ public class SessionBean {
 	public String mudarSenha(){
     	UsuarioDAO uDao = new UsuarioDAO();
     	
-//    	if (current == null) {
-//        	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuário não encontrado", null);
-//			FacesContext.getCurrentInstance().addMessage("formAlterarSenha:login", msg);
-//			return null;
-//    	}else 
     	if (!((this.senhaNova).equals(senhaNovaIgual))){
     		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Confirmação incorreta.", null);
 			FacesContext.getCurrentInstance().addMessage("formAlterarSenha:login", msg);
@@ -97,9 +90,7 @@ public class SessionBean {
         	uDao.update(u);
         	uDao.commit();
         	
-//        	uDao.changePassword(this.usuario.getId(), senhaNova);
         	System.out.println(uDao.read(this.usuario.getId()).getSenha());
-//        	this.loadFlashLogin(this.usuario);
             return "dashboard";
         }
     }

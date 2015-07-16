@@ -45,16 +45,13 @@ public class UsuarioDAO extends DAO<Usuario>{
 			List<Usuario> retorno = new ArrayList<Usuario>();
 			retorno = q.getResultList();
 			if(retorno.size() > 0){
-				System.out.println("retorno > 0");
 				Usuario user = (Usuario) retorno.get(0);
 				
 				Query p = manager.createQuery("update Usuario set senha = :senhaNova where id = :id");
 				p.setParameter("senhaNova", senhaNova);
 				p.setParameter("id", id);
-				
 				return user;
 			}else {
-				System.out.println("retorno < 0");
 				return null;
 			}
 			

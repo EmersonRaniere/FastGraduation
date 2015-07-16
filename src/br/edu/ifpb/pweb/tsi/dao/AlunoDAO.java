@@ -15,10 +15,8 @@ public class AlunoDAO extends DAO<Aluno>{
 		try{
 			Aluno u = (Aluno)q.getSingleResult();
 			if (u != null){
-				System.out.println("entrou aqui1");
 				return u;
 			}else{
-				System.out.println("entrou aqui2");
 				return null;
 			}
 		}

@@ -15,10 +15,8 @@ public class ProfessorDAO extends DAO<Professor>{
 		try{
 			Professor p = (Professor)q.getSingleResult();
 			if (p != null){
-				System.out.println("entrou aqui1");
 				return p;
 			}else{
-				System.out.println("entrou aqui2");
 				return null;
 			}
 		}
